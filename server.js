@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const {uri}=require("./config")
+const {uri}=process.env
 // Import routes
 const getCars = require('./routes/getCars');
 
@@ -11,7 +11,7 @@ const getCars = require('./routes/getCars');
 const app = express();
 // CORS configuration
 
-
+console.log(process.env);
 app.use(cors({
   origin: 'http://localhost:3000'  // This is the URL of your React app
 }));
