@@ -3,7 +3,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const {uri}=process.env
+const dotenv = require('dotenv')
+const { DB_HOST }=process.env
 // Import routes
 const getCars = require('./routes/getCars');
 
@@ -11,7 +12,7 @@ const getCars = require('./routes/getCars');
 const app = express();
 // CORS configuration
 
-console.log(process.env);
+dotenv.config()
 app.use(cors({
   origin: 'http://localhost:3000'  // This is the URL of your React app
 }));
@@ -24,7 +25,7 @@ const PORT = process.env.PORT || 8080;
 
 // Connect to the database
 mongoose.Promise = global.Promise;
-mongoose.connect(uri, { useNewUrlParser: true }).then(
+mongoose.connect(DB_HOST , { useNewUrlParser: true }).then(
   () => { console.log('Successfully connected to the database!') },
   err => { console.log('Could not connect to the database...' + err) }
 );
