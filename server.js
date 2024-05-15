@@ -3,12 +3,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const {uri}=require("./config")
 // Import routes
 const getCars = require('./routes/getCars');
 
 // Initialize express
 const app = express();
 // CORS configuration
+
+
 app.use(cors({
   origin: 'http://localhost:3000'  // This is the URL of your React app
 }));
@@ -17,7 +20,7 @@ app.use(cors({
 const PORT = process.env.PORT || 8080;
 
 // ! [IMPORTANT]: Replace with your mongoDB URI string. You can get it from your Atlas cluster.
-const uri = "mongodb+srv://student:qGUO55MHRwXinFzB@hyperiondev.ksm1wff.mongodb.net/"
+
 
 // Connect to the database
 mongoose.Promise = global.Promise;
