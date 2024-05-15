@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv')
 dotenv.config()
-const { DB_HOST }=process.env
+const { DB_HOST, PORT = 8080}=process.env
 // Import routes
 const getCars = require('./routes/getCars');
 
@@ -17,7 +17,7 @@ app.use(cors({
 }));
 
 // Set up port for server to listen on
-const PORT = process.env.PORT || 8080;
+
 
 // ! [IMPORTANT]: Replace with your mongoDB URI string. You can get it from your Atlas cluster.
 
@@ -25,8 +25,10 @@ const PORT = process.env.PORT || 8080;
 // Connect to the database
 mongoose.Promise = global.Promise;
 mongoose.connect(DB_HOST , { useNewUrlParser: true }).then(
-  () => { console.log('Successfully connected to the database!') },
-  err => { console.log('Could not connect to the database...' + err) }
+  () => { console.log('Successfully connected to the database!')
+  app.listen(PORT) },
+  err => { console.log('Could not connect to the database...' + err) 
+process.exit(1)}
 );
 
 // Allow app to accept json and url encoded values
@@ -36,7 +38,5 @@ app.use(bodyParser.json());
 // Set up routes to be handled from: http://localhost:8080/blogs
 app.use('/cars', getCars);
 
-// Start up express server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+
+
