@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv')
+dotenv.config()
 const { DB_HOST }=process.env
 // Import routes
 const getCars = require('./routes/getCars');
@@ -11,8 +12,6 @@ const getCars = require('./routes/getCars');
 // Initialize express
 const app = express();
 // CORS configuration
-
-dotenv.config()
 app.use(cors({
   origin: 'http://localhost:3000'  // This is the URL of your React app
 }));
